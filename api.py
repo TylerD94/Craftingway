@@ -44,11 +44,9 @@ class API:
         )
 
         ingredients = []
-        print(recipe)
 
         for x in range(8):
             if recipe['Results'][0][f'ItemIngredient{x}']:
-                print(recipe['Results'][0][f'ItemIngredient{x}'])
                 ingredients.append({
                     recipe['Results'][0][f'ItemIngredient{x}']['Name']: amounts['Results'][0][f'AmountIngredient{x}']
                 })

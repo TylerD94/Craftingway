@@ -17,7 +17,7 @@ async def on_message(message):
     if message.author == bot.user:
         return
     elif message.content.startswith("!lookup "):  # Looks up an item by name, needs check for if item doesn't exist
-        await call_api(message, message.content[1:])
+        await call_api(message, message.content[8:])
     elif message.content.startswith("!help"):
         await send_help_message(message)
     else:
