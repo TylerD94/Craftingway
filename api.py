@@ -7,6 +7,11 @@ class API:
         self.api_tkn = api_tkn
         self.client = pyxivapi.XIVAPIClient(api_key=self.api_tkn)
 
+    def display_help(self):
+        help_message = '!lookup "ITEM NAME": Allows you to look up the recipe for an item by name.\n' \
+                       '!help: Displays this help message.'
+        return help_message
+
     async def get_ingredients(self, item_name):
         recipe = await self.client.index_search(
             name=item_name,
@@ -39,12 +44,13 @@ class API:
         )
 
         ingredients = []
+        print(recipe)
 
         for x in range(8):
             if recipe['Results'][0][f'ItemIngredient{x}']:
+                print(recipe['Results'][0][f'ItemIngredient{x}'])
                 ingredients.append({
                     recipe['Results'][0][f'ItemIngredient{x}']['Name']: amounts['Results'][0][f'AmountIngredient{x}']
                 })
 
         return ingredients
-
