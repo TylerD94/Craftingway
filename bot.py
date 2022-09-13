@@ -4,7 +4,7 @@ from api import API
 
 intents = discord.Intents.all()
 bot = Bot(command_prefix="!", intents=intents)
-api = None
+api: API
 
 
 @bot.event
@@ -18,6 +18,7 @@ async def on_message(message):
         return
     elif message.content.startswith("!"):
         await call_api(message, message.content[1:])
+    # TODO: Add feature to call for help
     else:
         return
 

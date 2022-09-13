@@ -1,6 +1,7 @@
 import pyxivapi
 
 
+# TODO: Put in error handling. Check to ensure that item exists before continuing
 class API:
     def __init__(self, api_tkn):
         self.api_tkn = api_tkn
