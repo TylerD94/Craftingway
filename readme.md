@@ -6,3 +6,5 @@ required, and how much of that item.
 In time, Craftingway will be able to give tons of more information, such
 as gathering spots, nested crafts, and so much more!
 
+Add Craftingway to your server, then call !help to get a list of all the 
+things Craftingway can do for you!
