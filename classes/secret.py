@@ -1,10 +1,18 @@
 import json
+import os
+
+
+def check_for_secret():
+    if os.path.exists('data/secret.json'):
+        return load_secret()
+    else:
+        return create_secret()
 
 
 def load_secret():
     with open('data/secret.json', 'r') as f:
         secret = json.load(f)
-        return secret['bot-token'], secret['api-token']
+        return secret
 
 
 def create_secret():
@@ -19,6 +27,8 @@ def create_secret():
     secret['api-token'] = input('api-token >>> ')
 
     secret_json = json.dumps(secret)
+
     with open('data/secret.json', 'w') as f:
         f.write(secret_json)
-    return secret['bot-token'], secret['api-token']
+
+    return secret
