@@ -25,13 +25,13 @@ async def check_command(message):
 
     if message.content.startswith("!lookup "):  # Looks up an item by name, needs check for if item doesn't exist
         await lookup_item(message)
-    elif message.content.startswith("!additem "):
-        user.add_item(await api.get_item(message.content[9:]))
-    elif message.content.startswith("!removeitem "):
-        user.remove_item(await api.get_item(message.content[12:]))
-    elif message.content.startswith("!saveditems"):
-        await send_message(message, user.get_list())
-    elif message.content.startswith("!help"):
+    elif message.content.startswith("!additem "):  # Adds item to user's saved items list
+        await send_message(message, user.add_item(await api.get_item(message.content[9:])))
+    elif message.content.startswith("!removeitem "):  # Removes item from user's saved items list
+        await send_message(message, user.remove_item(message.content[12:]))
+    elif message.content.startswith("!saveditems"):  # Displays user's saved items list
+        await send_message(message, user.get_saved_items())
+    elif message.content.startswith("!help"):  # Displays help text
         await send_message(message, api.display_help())
     else:
         return
@@ -42,7 +42,9 @@ def get_user(user_name):
         if user.user_name == user_name:
             return user
 
-    return User(user_name)
+    new_user = User(user_name)
+    users.append(new_user)
+    return new_user
 
 
 async def lookup_item(message):
