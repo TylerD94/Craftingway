@@ -1,6 +1,6 @@
 import discord
 from discord.ext.commands import Bot
-from api import API
+from classes.api import API
 
 intents = discord.Intents.all()
 bot = Bot(command_prefix="!", intents=intents)
@@ -17,6 +17,12 @@ async def on_message(message):
         return
     elif message.content.startswith("!lookup "):  # Looks up an item by name, needs check for if item doesn't exist
         await call_api(message, message.content[8:])
+    elif message.content.startswith("!additem "):
+        await message.channel.send("Still working on this feature! Coming soon!")
+    elif message.content.startswith("!removeitem "):
+        await message.channel.send("Under construction! To be finished soon!")
+    elif message.content.startswith("!saveditems"):
+        await message.channel.send("Still working on this one too, many things to come!")
     elif message.content.startswith("!help"):
         await send_help_message(message)
     else:
@@ -41,7 +47,7 @@ async def send_recipe_message(message, result):
     await message.channel.send(msg)
 
 
-def start(BOT, api_tkn):
+def start(bot_tkn, api_tkn):
     global api
     api = API(api_tkn)
-    bot.run(BOT)
+    bot.run(bot_tkn)

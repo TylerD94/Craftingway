@@ -8,7 +8,7 @@ class API:
         self.client = pyxivapi.XIVAPIClient(api_key=api_tkn)
 
     def display_help(self):
-        with open("data\\help.txt", 'r') as f:
+        with open("../data/help.txt", 'r') as f:
             help_message = f.read()
             return help_message
 
@@ -22,7 +22,10 @@ class API:
         for x in range(8):
             if ingredients['Results'][0][f'ItemIngredient{x}']:
                 recipe.append({
-                    ingredients['Results'][0][f'ItemIngredient{x}']['Name']: amounts['Results'][0][f'AmountIngredient{x}']
+                    # This gets the name of each ingredient
+                    ingredients['Results'][0][f'ItemIngredient{x}']['Name']:
+                    # This gets the quantity of each ingredient
+                        amounts['Results'][0][f'AmountIngredient{x}']
                 })
 
         return recipe
