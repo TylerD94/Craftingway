@@ -16,19 +16,24 @@ async def on_ready():
 async def on_message(message):
     if message.author == bot.user:
         return
-    elif message.content.startswith("!"):
-        await call_api(message, message.content[1:])
-    # TODO: Add feature to call for help
+    elif message.content.startswith("!lookup "):  # Looks up an item by name, needs check for if item doesn't exist
+        await call_api(message, message.content[8:])
+    elif message.content.startswith("!help"):
+        await send_help_message(message)
     else:
         return
 
 
 async def call_api(message, item):
     result = await api.get_ingredients(item)
-    await send_message(message, result)
+    await send_recipe_message(message, result)
 
 
-async def send_message(message, result):
+async def send_help_message(message):
+    await message.channel.send(api.display_help())
+
+
+async def send_recipe_message(message, result):
     msg = ''
     for d in result:
         for key in d:

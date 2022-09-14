@@ -2,6 +2,12 @@ import pyxivapi
 
 
 # TODO: Put in error handling. Check to ensure that item exists before continuing
+def display_help():
+    help_message = '!lookup "ITEM NAME": Allows you to look up the recipe for an item by name.\n' \
+                   '!help: Displays this help message.'
+    return help_message
+
+
 class API:
     def __init__(self, api_tkn):
         self.api_tkn = api_tkn
@@ -47,4 +53,3 @@ class API:
                 })
 
         return ingredients
-
