@@ -29,7 +29,6 @@ class Item:
         )
 
         recipe_dict = self.crafting_recipe(recipe)
-        print(recipe_dict)
         return self.create_recipe_message(recipe_dict)
 
     def crafting_recipe(self, recipe):
