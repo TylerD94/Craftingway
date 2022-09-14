@@ -11,8 +11,8 @@ if __name__ == '__main__':
     # TODO: Create a nicer message template
     # TODO: Implement search for gathering locations of materials
 
-    if os.path.exists('secret.json'):
-        with open('secret.json', 'r') as f:
+    if os.path.exists('data/secret.json'):
+        with open('data/secret.json', 'r') as f:
             lines = json.load(f)
             bot_token = lines['bot-token']
             api_token = lines['api-token']

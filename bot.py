@@ -4,7 +4,6 @@ from api import API
 
 intents = discord.Intents.all()
 bot = Bot(command_prefix="!", intents=intents)
-api: API
 
 
 @bot.event
@@ -25,8 +24,8 @@ async def on_message(message):
 
 
 async def call_api(message, item):
-    result = await api.get_ingredients(item)
-    await send_recipe_message(message, result)
+    recipe = await api.get_crafting_recipe(item)
+    await send_recipe_message(message, recipe)
 
 
 async def send_help_message(message):

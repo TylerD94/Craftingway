@@ -1,0 +1,2 @@
+!lookup {ITEM NAME}: Allows you to look up the recipe for an item by name.
+!help: Displays this help message.
