@@ -8,7 +8,7 @@ class Messages:
         user = self.users.get_user(self.message.author)
         content = self.message.content
 
-        if content.startswith("!lookup "):  # Looks up an item by name, needs check for if item doesn't exist
+        if content.startswith("!craft "):  # Looks up an item by name, needs check for if item doesn't exist
             await self.lookup_item()
         elif content.startswith("!additem "):  # Adds item to user's saved items list
             await self.send_message(user.add_item(await self.api.get_item(content[9:])))
@@ -22,10 +22,9 @@ class Messages:
             return
 
     async def lookup_item(self):
-        item = await self.api.get_item(self.message.content[8:])
-        recipe = await self.api.crafting_recipe(item)
-        msg = item.create_recipe_message(recipe)
-        await self.send_message(msg)
+        item = await self.api.get_item(self.message.content[7:])
+        recipe = await item.get_recipe()
+        await self.send_message(recipe)
 
     async def send_message(self, response):
         await self.message.channel.send(response)

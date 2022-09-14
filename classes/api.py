@@ -16,19 +16,4 @@ class API:
         item = Item(self.client, item_name)
         return item
 
-    async def crafting_recipe(self, item):
-        ingredients = await item.get_ingredients()
-        amounts = await item.get_quantities()
 
-        recipe = []
-
-        for x in range(8):
-            if ingredients['Results'][0][f'ItemIngredient{x}']:
-                recipe.append({
-                    # This gets the name of each ingredient
-                    ingredients['Results'][0][f'ItemIngredient{x}']['Name']:
-                    # This gets the quantity of each ingredient
-                        amounts['Results'][0][f'AmountIngredient{x}']
-                })
-
-        return recipe
