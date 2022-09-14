@@ -39,3 +39,11 @@ class Item:
         )
 
         return quantities
+
+    def create_recipe_message(self, recipe):
+        msg = ''
+        for d in recipe:
+            for key in d:
+                value = d[key]
+                msg += f'{key}: {value} required.\n'
+        return msg
