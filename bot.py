@@ -1,9 +1,11 @@
 import discord
 from discord.ext.commands import Bot
 from classes.api import API
+from classes.user import User
 
 intents = discord.Intents.all()
 bot = Bot(command_prefix="!", intents=intents)
+users = []
 
 
 @bot.event
@@ -15,36 +17,52 @@ async def on_ready():
 async def on_message(message):
     if message.author == bot.user:
         return
-    elif message.content.startswith("!lookup "):  # Looks up an item by name, needs check for if item doesn't exist
-        await call_api(message, message.content[8:])
+    await check_command(message)
+
+
+async def check_command(message):
+    user = get_user(message.author)
+
+    if message.content.startswith("!lookup "):  # Looks up an item by name, needs check for if item doesn't exist
+        await lookup_item(message)
     elif message.content.startswith("!additem "):
-        await message.channel.send("Still working on this feature! Coming soon!")
+        user.add_item(await api.get_item(message.content[9:]))
     elif message.content.startswith("!removeitem "):
-        await message.channel.send("Under construction! To be finished soon!")
+        user.remove_item(await api.get_item(message.content[12:]))
     elif message.content.startswith("!saveditems"):
-        await message.channel.send("Still working on this one too, many things to come!")
+        await send_message(message, user.get_list())
     elif message.content.startswith("!help"):
-        await send_help_message(message)
+        await send_message(message, api.display_help())
     else:
         return
 
 
-async def call_api(message, item):
-    recipe = await api.get_crafting_recipe(item)
-    await send_recipe_message(message, recipe)
+def get_user(user_name):
+    for user in users:
+        if user.user_name == user_name:
+            return user
+
+    return User(user_name)
 
 
-async def send_help_message(message):
-    await message.channel.send(api.display_help())
+async def lookup_item(message):
+    item = await api.get_item(message.content[8:])
+    recipe = await api.crafting_recipe(item)
+    msg = create_recipe_message(recipe)
+    await send_message(message, msg)
 
 
-async def send_recipe_message(message, result):
+def create_recipe_message(recipe):
     msg = ''
-    for d in result:
+    for d in recipe:
         for key in d:
             value = d[key]
             msg += f'{key}: {value} required.\n'
-    await message.channel.send(msg)
+    return msg
+
+
+async def send_message(message, response):
+    await message.channel.send(response)
 
 
 def start(bot_tkn, api_tkn):

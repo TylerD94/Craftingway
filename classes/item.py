@@ -3,8 +3,8 @@ class Item:
         self.client = client
         self.item_name = item_name
 
-    async def get_item(self):
-        item = await self.client.index_search(
+    async def get_ingredients(self):
+        ingredients = await self.client.index_search(
             name=self.item_name,
             indexes=["Recipe"],
             columns=[
@@ -20,10 +20,10 @@ class Item:
             ]
         )
 
-        return item
+        return ingredients
 
-    async def get_crafting_materials(self):
-        materials = await self.client.index_search(
+    async def get_quantities(self):
+        quantities = await self.client.index_search(
             name=self.item_name,
             indexes=["Recipe"],
             columns=[
@@ -38,4 +38,4 @@ class Item:
             ]
         )
 
-        return materials
+        return quantities

@@ -1,5 +1,5 @@
 import pyxivapi
-from item import Item
+from classes.item import Item
 
 
 # TODO: Put in error handling. Check to ensure that item exists before continuing
@@ -8,14 +8,17 @@ class API:
         self.client = pyxivapi.XIVAPIClient(api_key=api_tkn)
 
     def display_help(self):
-        with open("../data/help.txt", 'r') as f:
+        with open("data\\help.txt", 'r') as f:
             help_message = f.read()
             return help_message
 
-    async def get_crafting_recipe(self, item_name):
+    async def get_item(self, item_name):
         item = Item(self.client, item_name)
-        ingredients = await item.get_item()
-        amounts = await item.get_crafting_materials()
+        return item
+
+    async def crafting_recipe(self, item):
+        ingredients = await item.get_ingredients()
+        amounts = await item.get_quantities()
 
         recipe = []
 
