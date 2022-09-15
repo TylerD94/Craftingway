@@ -1,5 +1,9 @@
 !craft {ITEM NAME}: Allows you to look up the recipe for an item by name.
+
 !saveditems: Allows you to view the crafting items that you have saved
+
 !additem {ITEM NAME}: Adds the named item to your saved items
+
 !removeitem {ITEMNAME}: Removes the named item from your saved items
-!help: Displays this help message.
+
+!info: Displays this help message.
