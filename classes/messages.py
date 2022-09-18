@@ -1,16 +1,16 @@
 class Messages:
-    def __init__(self, context, api, users, *args):
+    def __init__(self, context, api, users, *item_name):
         self.context = context
-        self.content = self.define_content(*args)
+        self.content = self.define_content(item_name)
         self.api = api
         self.users = users
         self.user = self.users.get_user(self.context.author)
 
-    def define_content(self, *args):
+    def define_content(self, item_names):
         content = ''
 
-        for arg in args:
-            content += f'{arg} '
+        for item_name in item_names:
+            content += f'{item_name} '
 
         return content
 

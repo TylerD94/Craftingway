@@ -29,14 +29,14 @@ class Item:
         )
 
         recipe_dict = self.crafting_recipe(recipe)
-        return self.create_recipe_message(recipe_dict)
+        return self.create_recipe_message(**recipe_dict)
 
     def crafting_recipe(self, recipe):
-        recipe_dict = []
+        recipe_dict = {}
 
         for x in range(8):
             if recipe['Results'][0][f'ItemIngredient{x}']:
-                recipe_dict.append({
+                recipe_dict.update({
                     # This gets the name of each ingredient
                     recipe['Results'][0][f'ItemIngredient{x}']['Name']:
                     # This gets the quantity of each ingredient
@@ -44,10 +44,9 @@ class Item:
                 })
         return recipe_dict
 
-    def create_recipe_message(self, recipe):
+    def create_recipe_message(self, **recipes):
         msg = ''
-        for d in recipe:
-            for key in d:
-                value = d[key]
-                msg += f'{key}: {value} required.\n'
+        for recipe in recipes:
+            msg += f'{recipe}: {recipes[recipe]} required.\n'
+
         return msg

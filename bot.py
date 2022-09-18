@@ -43,9 +43,9 @@ async def help(ctx):
     await msg.help()
 
 
-def start(bot_tkn, api_tkn):
+def start(**secrets):
     global api
     global users
-    api = API(api_tkn)
+    api = API(secrets['api-token'])
     users = Users()
-    bot.run(bot_tkn)
+    bot.run(secrets['bot-token'])
