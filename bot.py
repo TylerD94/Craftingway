@@ -43,7 +43,7 @@ async def help(ctx):
     await msg.help()
 
 
-def start(**secrets):
+def start(secrets):
     global api
     global users
     api = API(secrets['api-token'])
