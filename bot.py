@@ -1,3 +1,5 @@
+import os
+
 import discord
 from discord.ext.commands import Bot
 from classes.api import API
@@ -43,9 +45,9 @@ async def help(ctx):
     await msg.help()
 
 
-def start(secrets):
+def start():
     global api
     global users
-    api = API(secrets['api-token'])
+    api = API()
     users = Users()
-    bot.run(secrets['bot-token'])
+    bot.run(os.environ.get("CRAFTINGWAY_API_KEY"))
