@@ -9,11 +9,6 @@ class API:
     def __init__(self):
         self.client = pyxivapi.XIVAPIClient(api_key=os.environ.get("XIVAPI_KEY"))
 
-    def display_help(self):
-        with open("data\\help.txt", 'r') as f:
-            help_message = f.read()
-            return help_message
-
     async def get_item(self, item_name):
         item = Item(self.client, item_name)
         return item

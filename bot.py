@@ -39,11 +39,6 @@ async def saved_items(ctx):
     await msg.saved_items()
 
 
-@bot.command(name='info', description='Sends a help message')
-async def help(ctx):
-    msg = Messages(ctx, api, users)
-    await msg.help()
-
 
 def start():
     global api

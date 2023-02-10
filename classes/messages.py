@@ -29,8 +29,5 @@ class Messages:
     async def saved_items(self):
         await self.send_message(self.user.get_saved_items())
 
-    async def help(self):
-        await self.send_message(self.api.display_help())
-
     async def send_message(self, response):
         await self.context.channel.send(response)
